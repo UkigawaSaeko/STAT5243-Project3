@@ -1,0 +1,379 @@
+:root {
+  --hero-red: #c41e3a;
+  --amazon-yellow: #ffd814;
+  --text: #0f1111;
+  --muted: #565959;
+  --bg: #ffffff;
+  --border: #d5d9d9;
+  --ai-accent: #1e3a5f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: #f7f8f8;
+}
+
+.app-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(15, 17, 17, 0.06);
+}
+
+@media (max-width: 720px) {
+  .product-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-img-wrap {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.product-img-wrap img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.product-meta h1 {
+  font-size: 1.35rem;
+  line-height: 1.35;
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.price-line {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.unit-price {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.bullets {
+  margin: 0 0 20px;
+  padding-left: 1.1rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.bullets li {
+  margin-bottom: 6px;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.btn-cart {
+  background: var(--amazon-yellow);
+  border: 1px solid #fcd200;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-cart:hover {
+  filter: brightness(0.97);
+}
+
+.toast-success {
+  margin-top: 10px;
+  margin-bottom: 4px;
+  padding: 10px 14px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  color: #065f46;
+  font-size: 0.92rem;
+  font-weight: 600;
+  max-width: 360px;
+}
+
+.btn-sample {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-sample:hover {
+  background: #f3f3f3;
+}
+
+.help-block {
+  margin-top: 28px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(15, 17, 17, 0.06);
+}
+
+.help-block--ai {
+  border-left: 4px solid var(--ai-accent);
+  background: linear-gradient(180deg, #f8fafc 0%, #fff 40%);
+}
+
+.help-block h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.help-block .hint {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 0;
+  line-height: 1.45;
+}
+
+.help-panel-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.advisor-avatar-wrap {
+  flex-shrink: 0;
+}
+
+.advisor-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+  display: block;
+  background: #111;
+}
+
+.help-panel-main {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 520px) {
+  .help-panel-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .btn-help {
+    max-width: 100%;
+  }
+}
+
+.ab-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f0f2f2;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.help-block--ai .ab-badge {
+  background: #e0e7ff;
+  color: #3730a3;
+  font-weight: 600;
+}
+
+.btn-help {
+  background: var(--hero-red);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  max-width: 360px;
+}
+
+.help-block--ai .btn-help {
+  background: var(--ai-accent);
+}
+
+.btn-help:hover {
+  filter: brightness(1.05);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 420px;
+  width: 100%;
+  padding: 18px 20px 16px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.modal-title {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.modal-privacy-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: -6px 0 12px;
+  line-height: 1.4;
+}
+
+.chat-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-options button {
+  text-align: left;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fafafa;
+  cursor: pointer;
+  font-size: 0.92rem;
+}
+
+.chat-options button:hover {
+  background: #f0f4ff;
+  border-color: #c7d2fe;
+}
+
+.reply-box {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #f6f7f7;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text);
+  min-height: 2.5em;
+}
+
+.survey-block {
+  margin-top: 24px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.survey-block h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.survey-block .q {
+  margin-bottom: 10px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.survey-block label {
+  display: block;
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.btn-survey {
+  margin-top: 12px;
+  background: #232f3e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-survey:hover {
+  opacity: 0.92;
+}
+
+.survey-success {
+  display: none;
+  margin-top: 8px;
+  padding: 14px 16px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  color: #065f46;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.footer-note {
+  margin-top: 24px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}

@@ -1,0 +1,2 @@
+# Shiny for Python (shinyapps.io / rsconnect deploy shiny)
+shiny>=0.7.0
