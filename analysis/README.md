@@ -1,41 +1,76 @@
-# A/B Test Statistical Analysis (Project 3)
+# 📊 A/B Test Statistical Analysis (Project 3)
 
-## Overview
-This project conducts a statistical analysis of an A/B test comparing two design variants (Group A vs Group B).
+## 🔍 Overview
+This project presents a comprehensive statistical analysis of an A/B test comparing two design variants (**Group A vs Group B**).
 
-The analysis focuses on:
-- User perception (willingness & embarrassment surveys)
-- User behavior (click-through rate and conversion)
+The analysis evaluates both:
+- **User perception** (survey-based metrics)
+- **User behavior** (interaction-based metrics)
 
-## Data
+---
+
+## 📁 Data Sources
+
 The analysis is based on three datasets:
-- willingness.csv: survey responses on user willingness (1–5 scale)
-- embarrassment.csv: survey responses on user embarrassment (1–5 scale)
-- Behavior.csv: behavioral metrics (impressions, clicks, add-to-cart)
 
-## Methods
-We apply multiple statistical techniques to ensure robust conclusions:
+| Dataset | Description |
+|--------|------------|
+| `willingness.csv` | User willingness ratings (1–5 scale) |
+| `embarrassment.csv` | User embarrassment ratings (1–5 scale) |
+| `Behavior.csv` | Behavioral metrics (impressions, clicks, add-to-cart) |
 
+---
+
+## 🧪 Methods
+
+To ensure robust and reliable conclusions, we applied:
+
+### 📌 Statistical Tests
 - Two-sample t-test (mean comparison)
-- Mann–Whitney U test (robustness check)
-- Effect size (Cohen’s d)
-- Confidence intervals (95%)
+- Mann–Whitney U test (non-parametric robustness check)
+
+### 📌 Effect & Uncertainty
+- Cohen’s d (effect size)
+- 95% Confidence Intervals
+
+### 📌 Behavioral Analysis
 - Proportion z-test (CTR & conversion rate)
-- Funnel analysis (impression → click → purchase)
+- Funnel analysis (Impression → Click → Purchase)
 
-## Results Summary
-- Group B significantly improves willingness
-- Group B significantly reduces embarrassment
-- Behavioral improvements (CTR, conversion) are positive but not statistically significant
+---
 
-## Conclusion
-Group B demonstrates strong improvements in user perception and promising behavioral trends.  
-Further experiments with larger sample sizes are recommended to confirm behavioral effects.
+## 📈 Key Results
 
-## How to Run
+- ✅ **Willingness**: Group B significantly increases user willingness  
+- ✅ **Embarrassment**: Group B significantly reduces user embarrassment  
+- ⚠️ **Behavior Metrics**:
+  - CTR and conversion rate improve under Group B  
+  - However, results are **not statistically significant**
+
+---
+
+## 💡 Cross-Metric Insight
+
+The experiment shows a **clear improvement in user perception**, which aligns with **positive but inconclusive behavioral trends**.
+
+This suggests that:
+> Improved perception may translate into behavioral gains, but larger sample sizes are required to confirm the effect.
+
+---
+
+## 🧾 Conclusion
+
+Overall, **Group B is the superior design**. It delivers statistically significant improvements in both willingness and embarrassment, supported by large effect sizes.
+
+Although behavioral improvements are not statistically significant, their consistent positive direction combined with limited statistical power suggests that the treatment is promising.
+
+Further experiments with larger sample sizes are recommended to validate its impact on user behavior.
+
+---
+
+## ▶️ How to Run
+
 Install dependencies:
 
+```bash
 pip install pandas numpy scipy statsmodels matplotlib
-
-Then run:
-- statistical_analysis.ipynb
