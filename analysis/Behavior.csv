@@ -1,0 +1,5 @@
+Event name,experiment_impression,experiment_impression,assistant_click,assistant_click,add_to_cart,add_to_cart,Totals,Totals,
+ab group,Event count,Active users,Event count,Active users,Event count,Active users,Event count,Active users,
+,232,93,119,70,50,32,401,93,Grand total
+ab_B,123,61,67,39,29,19,219,61,
+ab_A,109,62,52,31,21,13,182,62,
