@@ -1,81 +1,190 @@
-# Mighty Patch A/B test page (STAT5243 Project 3)
+# STAT5243 Project 3: A/B Testing for Sensitive Purchase Assistant
 
-Single-page **Shiny for Python** app: human advisor (A) vs private AI (B) assignment, survey, and GA4 events. Intended deployment target is **shinyapps.io**.
+##  Project Overview
+This project investigates how different assistant framings affect user behavior and perception in a sensitive purchase context (e.g., acne treatment products). We implement and evaluate an A/B test comparing:
 
-## Repository layout
+- **Control (A):** Human advisor
+- **Treatment (B):** Private AI assistant
 
-| Path | Purpose |
-|------|---------|
-| `app.py` | Application entry; exports `app` |
-| `www/` | Front-end assets: `styles.css`, `ab.js`; add **`product.png`** and **`advisor.png`** yourself or images will not load |
-| `requirements.txt` | Python dependencies |
-| `pyproject.toml` / `.python-version` | Prefer Python 3.10–3.12 (matches rsconnect / shinyapps) |
-| `rsconnect-python/` | Account/app metadata after rsconnect deploy (safe to keep for redeploys) |
+The goal is to assess whether a private AI assistant improves:
+- Willingness to seek help
+- Perceived embarrassment
+- Behavioral engagement (CTR, add-to-cart)
 
-## Run locally
+---
+
+##  Research Design
+- **Experimental Unit:** Browser session
+- **Assignment:** Randomized (50/50 split between A and B)
+- **Platform:** Shiny for Python web application
+- **Data Sources:**
+  - Survey (Likert scale: willingness & embarrassment)
+  - Google Analytics 4 (CTR, add-to-cart, funnel)
+
+---
+
+##  Key Features
+- Real-time A/B assignment via frontend logic
+- Integrated survey at the end of user flow
+- Google Analytics tracking for behavioral metrics
+- Clean UI simulating a real e-commerce environment
+- Full statistical analysis pipeline (see report)
+
+---
+
+##  Project Structure
+```
+
+Project 3/
+│
+├── app.py # Main Shiny application
+├── requirements.txt # Python dependencies
+├── pyproject.toml # Project configuration
+├── www/ # Frontend assets (JS, CSS, images)
+├── photo/ # Static images
+├── logs/ # Logging directory
+├── rsconnect-python/ # Deployment config
+├── Project 3.pdf # Final report
+└── README.md # Project documentation
+
+````
+
+---
+
+##  Installation & Setup
+
+### 1. Clone the repository
+```bash
+git clone <your-repo-link>
+cd Project\ 3
+````
+
+### 2. Create virtual environment (recommended)
+
+```bash
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
+```
+
+---
+
+##  Running the Application
+
+```bash
 python app.py
 ```
 
-Or:
+Then open your browser and go to:
 
-```bash
-shiny run app.py --host 0.0.0.0 --port 3838
+```
+http://127.0.0.1:8000
 ```
 
-Optional environment variables: `GA_MEASUREMENT_ID`, `PORT`.
+---
 
-## Deploy to shinyapps.io
+##  Live Deployment
 
-Cloud builds **do not support Python 3.14**. Use **`rsconnect` from Python 3.12 or 3.11** (the interpreter that runs `rsconnect` determines what gets uploaded).
+If available, access the deployed app here:
 
-```powershell
-py -3.12 -m pip install -r requirements.txt rsconnect-python
-py -3.12 -m rsconnect add --server shinyapps.io --account <account> --name <local-alias>
-cd "path\to\your\project"
-py -3.12 -m rsconnect deploy shiny . --name <local-alias> --title <app-title>
-```
+👉 [https://5243freya.shinyapps.io/stat5243-project3/](https://5243freya.shinyapps.io/stat5243-project3/)
 
-If your default `rsconnect` on PATH comes from Python 3.14, call the 3.12 executable explicitly (e.g. Anaconda `Scripts\rsconnect.exe`). Check with `where.exe rsconnect`.
+---
 
-App URL shape: `https://<account>.shinyapps.io/<app-name>/`
+##  Data Collection
 
-### Environment variables (shinyapps dashboard → app → Vars)
+* **Time Period:** April 10 – April 17, 2026
+* **Recruitment:** Distributed via personal networks (classmates, friends, family)
+* **Survey:**
 
-| Variable | Description |
-|----------|-------------|
-| `GA_MEASUREMENT_ID` | Web stream ID (`G-…`). If unset, `app.py`’s default is used; set empty to disable GA |
-| `GA_DEBUG` | Set to `1` for GA4 DebugView; remove when finished |
+  * Appears at the end of user interaction
+  * Voluntary participation
+* **Behavioral Data:**
 
-After changing Vars, **redeploy or restart** the app.
+  * Collected via Google Analytics 4
+  * Metrics:
 
-## Google Analytics 4
+    * Impressions
+    * Clicks (assistant interaction)
+    * Add-to-cart events
 
-- `app.py` injects gtag with **`send_page_view: false`** so there is no automatic `page_view` without A/B; the tagged `page_view` with experiment params is sent from `www/ab.js` after the session is ready.
-- **Sanity check:** browser F12 → Network → request to `googletagmanager.com/gtag/js`; `collect` requests with status **204**; events appear in GA4 **Realtime** or DebugView.
+---
 
-### Custom dimensions ↔ event parameters (must match Admin registration)
+##  Reproducibility
 
-`ab_group` appears **only** in server log JSON and is **not** sent to GA; bind dimensions to the parameter names below.
+To reproduce the full workflow:
 
-| Use | Parameter | Notes |
-|-----|-----------|--------|
-| A/B arm | `stat5243_ab` | Values `ab_A` / `ab_B`; in-app and CSV still use `A` / `B` |
-| Experiment name | `experiment_name` | e.g. `sensitive_purchase_assistant_ab` |
-| Variant | `variant` | `human_advisor` / `private_ai` |
-| Embarrassment item | `embarrassment` | Mostly on `survey_submit` |
-| Help willingness | `help_willingness` | Mostly on `survey_submit`; CSV column is still **`trust`** |
+1. Run the app locally
+2. Interact with both A/B variants
+3. Collect survey and GA data
+4. Use statistical methods described in the report:
 
-On first load, one of **`stat5243_ab_A`** or **`stat5243_ab_B`** is also sent as a dedicated event name for easy per-arm counts in the Events report.
+   * Welch t-test
+   * Mann–Whitney U
+   * Cohen’s d
+   * Two-proportion z-test
+   * Power analysis
 
-## Behavior and storage
+> Note: Google Analytics data requires access to the configured GA4 property.
 
-- **A/B assignment, session id, survey submitted flag:** `sessionStorage`. **Refresh** in the same tab keeps them; **close the tab and open the site again** re-randomizes the arm and allows a new survey submission.
-- **Client events:** `Shiny.setInputValue("client_event", …)` → server appends rows to CSV.
-- **Local CSV:** `logs/events.csv` (created on first write; `logs/*.csv` is gitignored).
-- **Production shinyapps:** instance disk is often ephemeral—**do not rely** on server-side CSV; use **GA4** for analysis.
+---
+
+##  Dependencies
+
+Key libraries used:
+
+* `shiny` (Shiny for Python)
+* `scipy`
+* `statsmodels`
+* `numpy`
+* `pandas`
+
+Full list in `requirements.txt`.
+
+---
+
+##  Limitations
+
+* Convenience sampling (not fully representative)
+* Session-level randomization (not user-level)
+* Behavioral data underpowered for small effects
+* GA tracking depends on correct event instrumentation
+
+---
+
+##  Authors
+
+* Freya Chen
+* Yunjie Huang
+* Pingyu Zhou
+* Kaifeng Si
+
+---
+
+##  Report
+
+See full analysis and results in:
+
+📎 `Final_report.pdf`
+
+---
+
+##  Notes
+
+This project is developed for **STAT5243** and demonstrates:
+
+* Experimental design
+* A/B testing implementation
+* Statistical inference
+* Data-driven product insights
+
+
 
 ## Troubleshooting
 
